@@ -26,7 +26,7 @@ I'm passionate about technology, automation, and building systems that scale. De
 
 This journey is about more than just learning tools - it's about adopting a mindset of continuous learning, collaboration, and excellence. By documenting everything publicly, I hope to inspire others while building a strong portfolio that demonstrates my commitment and capabilities.
 
-**Today is Day 1. Let's build something amazing! 🚀**
+**Day 1 is complete! The journey has officially begun! 🚀**
 
 ---
 
@@ -46,7 +46,7 @@ Study Sessions Completed: 1 / 192
 
 | Certification | Target Date | Status | Study Hours | Cost | Score |
 |--------------|-------------|---------|-------------|------|-------|
-| 🟡 AWS Cloud Practitioner | January 2026 | 📚 Week 1/12 | 0/40 | $100 | - |
+| 🟡 AWS Cloud Practitioner | January 2026 | 📚 Week 1/12 | 1.5/40 | $100 | - |
 | ⚪ AWS Solutions Architect Associate | April 2026 | 🔜 Upcoming | 0/80 | $150 | - |
 | ⚪ Certified Kubernetes Administrator | July 2026 | 🔜 Upcoming | 0/100 | $395 | - |
 | ⚪ AWS Solutions Architect Professional | October 2026 | 🔜 Upcoming | 0/120 | $300 | - |
@@ -84,7 +84,9 @@ Streak:         [ 1 ] days 🔥
 Achievements:   [ 0 / 85 ] unlocked
 ```
 
-**Today's Goal:** Start your journey! Earn your first 50 XP by completing tonight's study session!
+**Today's Achievement:** ✅ Day 1 complete! First 50 XP earned and streak started! 🔥
+
+**Tomorrow's Goal:** Continue building momentum with Day 2 - EC2 and Serverless Computing basics!
 
 [Learn more about the gamification system →](./Gamification/README.md)
 
