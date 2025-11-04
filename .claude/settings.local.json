@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "Bash(python xp_tracker_v2.py:*)",
+      "Bash(python:*)",
+      "Bash(cmd.exe /c \"xp.bat status\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

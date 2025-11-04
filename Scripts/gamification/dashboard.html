@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Learning Journey - Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .level-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .stat-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .chart-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .level-progress {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .level-item {
+            margin-bottom: 20px;
+        }
+        
+        .level-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .level-name {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .level-bar {
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .level-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .achievements-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .achievement {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .achievement.unlocked {
+            background: linear-gradient(135deg, #ffd89b, #19547b);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 216, 155, 0.5);
+        }
+        
+        .achievement-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .achievement-name {
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 DevOps Learning Dashboard</h1>
+            <div class="level-badge">
+                Level 1: 🌱 Cloud Seedling
+            </div>
+            <p style="color: #666; margin-top: 10px;">
+                Last updated: November 04, 2025 at 09:52 PM
+            </p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-value">325</div>
+                <div class="stat-label">Total XP</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-value">1</div>
+                <div class="stat-label">Day Streak</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">⏱️</div>
+                <div class="stat-value">4.5</div>
+                <div class="stat-label">Hours Studied</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-value">0</div>
+                <div class="stat-label">Achievements</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">📅</div>
+                <div class="stat-value">0</div>
+                <div class="stat-label">Weeks Done</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🎓</div>
+                <div class="stat-value">0</div>
+                <div class="stat-label">Certifications</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-value">0</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-value">325</div>
+                <div class="stat-label">Avg XP/Day</div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h2 class="chart-title">📈 Daily XP Progress (Last 30 Days)</h2>
+            <canvas id="dailyChart"></canvas>
+        </div>
+        
+        <div class="chart-container">
+            <h2 class="chart-title">📊 Weekly XP Summary</h2>
+            <canvas id="weeklyChart"></canvas>
+        </div>
+        
+        <div class="level-progress">
+            <h2 class="chart-title">🎖️ Level Progression</h2>
+            
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-name">🌱 Level 1: Cloud Seedling</span>
+                    <span>100%</span>
+                </div>
+                <div class="level-bar">
+                    <div class="level-fill" style="width: 100%">
+                        100%
+                    </div>
+                </div>
+            </div>
+            
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-name">☁️ Level 2: Cloud Apprentice</span>
+                    <span>65%</span>
+                </div>
+                <div class="level-bar">
+                    <div class="level-fill" style="width: 65.0%">
+                        65%
+                    </div>
+                </div>
+            </div>
+            
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-name">🔧 Level 3: DevOps Initiate</span>
+                    <span>0%</span>
+                </div>
+                <div class="level-bar">
+                    <div class="level-fill" style="width: 0%">
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-name">🛠️ Level 4: Infrastructure Builder</span>
+                    <span>0%</span>
+                </div>
+                <div class="level-bar">
+                    <div class="level-fill" style="width: 0%">
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-name">🐳 Level 5: Container Captain</span>
+                    <span>0%</span>
+                </div>
+                <div class="level-bar">
+                    <div class="level-fill" style="width: 0%">
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-name">⚙️ Level 6: Automation Engineer</span>
+                    <span>0%</span>
+                </div>
+                <div class="level-bar">
+                    <div class="level-fill" style="width: 0%">
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-name">☸️ Level 7: Kubernetes Commander</span>
+                    <span>0%</span>
+                </div>
+                <div class="level-bar">
+                    <div class="level-fill" style="width: 0%">
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-name">🏗️ Level 8: Cloud Architect</span>
+                    <span>0%</span>
+                </div>
+                <div class="level-bar">
+                    <div class="level-fill" style="width: 0%">
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-name">🚀 Level 9: DevOps Professional</span>
+                    <span>0%</span>
+                </div>
+                <div class="level-bar">
+                    <div class="level-fill" style="width: 0%">
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="level-item">
+                <div class="level-header">
+                    <span class="level-name">👑 Level 10: DevOps Master</span>
+                    <span>0%</span>
+                </div>
+                <div class="level-bar">
+                    <div class="level-fill" style="width: 0%">
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="footer">
+            <p>🚀 Keep going! You're on your way to DevOps Master! 🚀</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">
+                Journey started: November 04, 2025
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Daily Chart
+        const dailyCtx = document.getElementById('dailyChart').getContext('2d');
+        new Chart(dailyCtx, {
+            type: 'line',
+            data: {
+                labels: ['2025-11-04'],
+                datasets: [{
+                    label: 'XP Earned',
+                    data: [325],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + ' XP';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Weekly Chart
+        const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+        new Chart(weeklyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2025-W45'],
+                datasets: [{
+                    label: 'Weekly XP',
+                    data: [325],
+                    backgroundColor: 'rgba(118, 75, 162, 0.8)',
+                    borderColor: '#764ba2',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + ' XP';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

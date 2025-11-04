@@ -561,8 +561,8 @@ class DashboardGenerator:
     def save_dashboard(self):
         """Generate and save dashboard"""
         html = self.generate_html()
-        
-        with open(self.OUTPUT_FILE, 'w') as f:
+
+        with open(self.OUTPUT_FILE, 'w', encoding='utf-8') as f:
             f.write(html)
         
         print(f"✅ Dashboard generated: {self.OUTPUT_FILE}")
