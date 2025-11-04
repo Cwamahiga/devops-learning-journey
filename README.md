@@ -584,9 +584,9 @@ I'm learning in public and would love to connect with others on a similar journe
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
 [![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/yourhandle)
 [![Dev.to](https://img.shields.io/badge/dev.to-0A0A0A?style=for-the-badge&logo=dev.to&logoColor=white)](https://dev.to/yourhandle)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/savin2001)
 
-📧 **Email:** your.email@example.com  
+📧 **Email:**osukasavin2001@gmail.com  
 🌍 **Location:** Nairobi, Kenya (UTC+3)  
 💼 **Status:** Aspiring DevOps Engineer - Day 1 of 336!  
 ⏰ **Next Session:** TODAY at 6:00 PM EAT
@@ -642,39 +642,12 @@ I'm learning in public and would love to connect with others on a similar journe
 
 ---
 
-<div align="center">
 
-### 🚀 "The journey of a thousand miles begins with a single commit" 🚀
-
-**Day 1 - November 4, 2025**  
-**Hours Studied Today:** 0 / 384 total  
-**Commits Made:** 1 (This README!)  
-**Next Study Session:** Tonight at 6:00 PM EAT
-
----
-
-**Remember:** Every expert was once a beginner. Every professional started at Day 1.  
-**Today is YOUR Day 1. Let's make it count! 💪**
-
----
-
-![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=yourusername.devops-learning-journey)
-![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/devops-learning-journey)
-![GitHub repo size](https://img.shields.io/github/repo-size/yourusername/devops-learning-journey)
-
-**Made with ❤️ in Nairobi, Kenya 🇰🇪**
-
-*Last updated: November 4, 2025 - Day 1 of the journey*
-
-</div>
-eek 12:** "How I Passed AWS Cloud Practitioner: Complete Study Guide"
-
----
 
 ## 🙏 Acknowledgments & Inspiration
 
 **Standing on the shoulders of giants:**
-- The incredible DevOps community on Reddit, Twitter, and Discord
+- The incredible DevOps community on Reddit, Twitter, and LinkedIn
 - AWS Community Builders for free resources and support
 - Open source contributors who make learning accessible
 - Everyone sharing their learning journeys publicly
