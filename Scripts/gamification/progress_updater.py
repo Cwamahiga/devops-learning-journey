@@ -13,8 +13,8 @@ class ProgressUpdater:
     """Updates markdown files with current progress"""
     
     XP_DATA_FILE = "xp_data.json"
-    README_FILE = "README.md"
-    XP_TRACKER_FILE = "Gamification/XP_TRACKER.md"
+    README_FILE = "../../README.md"
+    XP_TRACKER_FILE = "../../Gamification/XP_TRACKER.md"
     
     def __init__(self):
         self.data = self.load_xp_data()
@@ -121,39 +121,39 @@ Achievements:   [ {len(self.data['achievements_unlocked'])} / 85 ] unlocked
     def update_readme(self):
         """Update main README with current stats"""
         if not os.path.exists(self.README_FILE) or not self.data:
-            print("❌ README or data not found")
+            print("README or data not found")
             return
-        
-        with open(self.README_FILE, 'r') as f:
+
+        with open(self.README_FILE, 'r', encoding='utf-8') as f:
             content = f.read()
-        
+
         # Update progress tracker section
         stats_block = self.create_stats_block()
         pattern = r'```\n█.*?\n\nCurrent Phase:.*?\n```'
         if re.search(pattern, content, re.DOTALL):
             content = re.sub(pattern, stats_block, content, flags=re.DOTALL)
-            print("✅ Updated Progress Tracker in README")
-        
+            print("Updated Progress Tracker in README")
+
         # Update gamification stats
         gamif_stats = self.create_gamification_stats()
         pattern2 = r'```\nLevel:.*?\n```'
         if re.search(pattern2, content, re.DOTALL):
             content = re.sub(pattern2, gamif_stats, content, flags=re.DOTALL)
-            print("✅ Updated Gamification Stats in README")
-        
+            print("Updated Gamification Stats in README")
+
         # Save updated README
-        with open(self.README_FILE, 'w') as f:
+        with open(self.README_FILE, 'w', encoding='utf-8') as f:
             f.write(content)
-        
-        print(f"✅ README.md updated successfully!")
+
+        print("README.md updated successfully!")
     
     def update_xp_tracker(self):
         """Update XP_TRACKER.md with current progress"""
         if not os.path.exists(self.XP_TRACKER_FILE) or not self.data:
-            print("❌ XP_TRACKER or data not found")
+            print("XP_TRACKER or data not found")
             return
-        
-        with open(self.XP_TRACKER_FILE, 'r') as f:
+
+        with open(self.XP_TRACKER_FILE, 'r', encoding='utf-8') as f:
             content = f.read()
         
         level, level_name, icon, _ = self.get_current_level()
@@ -193,21 +193,21 @@ Achievements:   [ {len(self.data['achievements_unlocked'])} / 85 ] unlocked
             content = re.sub(dashboard_pattern, new_dashboard, content, flags=re.DOTALL)
         
         # Save updated XP_TRACKER
-        with open(self.XP_TRACKER_FILE, 'w') as f:
+        with open(self.XP_TRACKER_FILE, 'w', encoding='utf-8') as f:
             f.write(content)
-        
-        print(f"✅ XP_TRACKER.md updated successfully!")
+
+        print("XP_TRACKER.md updated successfully!")
     
     def update_all(self):
         """Update all markdown files"""
         if not self.data:
-            print("❌ No XP data found. Run xp_tracker_v2.py first to create data.")
+            print("No XP data found. Run xp_tracker_v2.py first to create data.")
             return
-        
-        print("\n🔄 Updating progress in all files...\n")
+
+        print("\nUpdating progress in all files...\n")
         self.update_readme()
         self.update_xp_tracker()
-        print("\n✅ All files updated!\n")
+        print("\nAll files updated!\n")
 
 def main():
     """Main function"""
